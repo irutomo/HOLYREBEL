@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOLY LABEL - ストリート × エレガンス</title>
+    
+    <!-- BASE必須タグ -->
+    {GoogleAnalyticsTag}
+    {BASEMenuTag}
+    {FaviconTag}
+    {BackgroundTag}
+    {ContactPageURL}
+    {PrivacyPageURL}
+    {LawPageURL}
+    {ContactContentsTag}
+    {PrivacyContentsTag}
+    {LawContentsTag}
+    {ItemAttentionTag}
+    {IllegalReportTag}
+    {MembershipPageURL}
+    {MembershipMyPageURL}
+    {MembershipTermsURL}
+    {LogoTag}
+    
+    <meta name="description" content="HOLY LABEL - ストリート × エレガンスの融合。モダンなアーバンファッションブランド">
+    <meta name="keywords" content="ストリート,ファッション,エレガント,アーバン,モダン,HOLY LABEL">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* リセットCSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ユーティリティクラス */
+        .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .tac { text-align: center; }
+        .mb4 { margin-bottom: 4rem; }
+        .sp-mb3 { margin-bottom: 3rem; }
+        .hide { display: none !important; }
+
+        /* ヘッダー */
+        header.site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header.site-header a.home {
+            display: flex;
+            align-items: center;
+        }
+
+        header.site-header a.home img {
+            height: 60px;
+            width: auto;
+        }
+
+        /* ハンバーガーメニューボタン */
+        button.humberger {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .humberger__line {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #ffffff;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .humberger__line:before,
+        .humberger__line:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .humberger__line:before { top: -8px; }
+        .humberger__line:after { top: 8px; }
+
+        .humberger.-active .humberger__line { background: transparent; }
+        .humberger.-active .humberger__line:before { transform: rotate(45deg); top: 0; }
+        .humberger.-active .humberger__line:after { transform: rotate(-45deg); top: 0; }
+
+        /* ナビゲーションエリア */
+        .header__nav-area {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: #000;
+            transition: all 0.3s ease;
+            z-index: 999;
+            padding: 100px 40px 40px;
+            overflow-y: auto;
+        }
+
+        .header__nav-area.-active {
+            right: 0;
+        }
+
+        .global-navigation__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .global-navigation__list > li {
+            margin-bottom: 20px;
+        }
+
+        .global-navigation__list > li > a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            display: block;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .global-navigation__list > li > a:hover {
+            color: #ff6b35;
+        }
+
+        .global-navigation__list > li > a.expand:after {
+            content: "+";
+            float: right;
+            font-size: 20px;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+
+        .global-navigation__list > li > a.expand.open:after {
+            transform: rotate(45deg);
+        }
+
+        ul.ex-list {
+            display: none;
+            padding-left: 20px;
+        }
+
+        ul.ex-list > li {
+            margin: 10px 0;
+        }
+
+        ul.ex-list > li > a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            padding: 8px 0;
+            border: none;
+        }
+
+        /* メインコンテンツ */
+        .site-main {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        /* ホームページ用スタイル */
+        .page-home .site-main {
+            padding: 0;
+        }
+
+        .main-sw {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .mySwiper .swiper-slide > img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        /* ページヘッダー */
+        .page-header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .page-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 商品一覧用スタイル */
+        .filter-area {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #ff6b35;
+            border-color: #ff6b35;
+            color: #ffffff;
+        }
+
+        .item-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        .item-list > li {
+            list-style: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .item-list > li:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .item-list > li > a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .item-list > li > a > figure {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .item-list > li > a > figure img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .item-list > li:hover > a > figure img {
+            transform: scale(1.05);
+        }
+
+        .item-list > li > a > .txt {
+            padding: 20px;
+        }
+
+        .item-list > li > a > .txt > .ttl {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .item-list > li > a > .txt > .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ff6b35;
+        }
+
+        /* フッター */
+        footer.site-footer {
+            background: #000;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .site-footer .logo {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .site-footer .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .search-form {
+            margin: 20px 0;
+        }
+
+        .search-field {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 10px 15px;
+            width: 250px;
+        }
+
+        .search-submit {
+            background: #ff6b35;
+            border: none;
+            color: #ffffff;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .fsns-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .fsns-list > li > a img {
+            width: 30px;
+            height: 30px;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .fsns-list > li > a:hover img {
+            filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(20deg);
+        }
+
+        .txt-wht {
+            color: #ffffff;
+        }
+
+        .cr {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* コンタクトフォーム用スタイル */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: #ff6b35;
+            color: #ffffff;
+            padding: 18px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* レスポンシブ */
+        @media screen and (max-width: 768px) {
+            .header__nav-area {
+                width: 100%;
+                right: -100%;
+                padding: 80px 30px 30px;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .filter-buttons {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .item-list {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .search-field {
+                width: 200px;
+            }
+
+            /* モバイル用2カラムレイアウト調整 */
+            .two-column {
+                display: block !important;
+            }
+
+            .two-column > div {
+                margin-bottom: 40px;
+            }
+
+            /* ルックブックギャラリー */
+            .lookbook-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+                gap: 20px !important;
+            }
+
+            .gallery-item img {
+                height: 300px !important;
+            }
+
+            /* アバウトページ */
+            .about-two-column {
+                display: block !important;
+                gap: 40px !important;
+            }
+
+            .about-philosophy {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+
+            /* 商品詳細ページ */
+            .product-detail-grid {
+                display: block !important;
+                gap: 40px !important;
+            }
+
+            .product-thumbnails {
+                justify-content: center !important;
+            }
+
+            .product-thumbnails img {
+                width: 80px !important;
+                height: 80px !important;
+            }
+
+            .related-products {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+                gap: 20px !important;
+            }
+
+            /* サイズボタン */
+            .size-buttons {
+                justify-content: center !important;
+            }
+
+            /* モーダル */
+            #lookbook-modal > div {
+                max-width: 95% !important;
+                max-height: 80% !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="wp-singular wp-theme-rosenkreuz no-sidebar">
+    <div id="page" class="site">
+        
+        <header class="site-header">
+            <button id="js-humberger" type="button" class="humberger" aria-controls="navigation" aria-expanded="false" onclick="toggleMenu()">
+                <span class="humberger__line"></span>
+            </button>
+            <a href="#" class="home" onclick="navigateAndClose('')">
+                <img src="assets/images/HLロゴ案01.png" alt="HOLY LABEL">
+            </a>
+        </header>
+
+        <div class="header__nav-area js-nav-area" id="sp-gmenu-area">
+            <ul class="global-navigation__list mb4 sp-mb3">
+                <li><a href="#" onclick="navigateAndClose('')">HOME</a></li>
+                <li>
+                    <a class="expand" href="#">ITEM</a>
+                    <ul class="ex-list" style="display: none;">
+                        <li><a href="#items" onclick="navigateAndClose('items')">ALL</a></li>
+                        <li><a href="#items/new" onclick="navigateAndClose('items/new')">NEW ARRIVALS</a></li>
+                        <li><a href="#items/top" onclick="navigateAndClose('items/top')">TOP</a></li>
+                        <li><a href="#items/bottom" onclick="navigateAndClose('items/bottom')">BOTTOM</a></li>
+                        <li><a href="#items/outwear" onclick="navigateAndClose('items/outwear')">OUTWEAR</a></li>
+                        <li><a href="#items/accessory" onclick="navigateAndClose('items/accessory')">ACCESSORY</a></li>
+                    </ul>
+                </li>
+                <li><a href="#lookbook" onclick="navigateAndClose('lookbook')">LOOK BOOK</a></li>
+            </ul>
+
+            <ul class="global-navigation__list mb4 sp-mb3">
+                <li><a href="#about" onclick="navigateAndClose('about')">ABOUT</a></li>
+                <li><a href="#contact" onclick="navigateAndClose('contact')">CONTACT</a></li>
+            </ul>
+        </div>
+        
+        <main id="primary" class="site-main">
+            <div id="app-content"></div>
+        </main>
+
+        <footer id="colophon" class="site-footer">
+            <div class="site-info">
+                <a class="logo" href="#" onclick="navigateAndClose('')">
+                    <img src="assets/images/HLロゴ案01.png" alt="HOLY LABEL">
+                </a>
+                <form role="search" method="get" class="search-form">
+                    <label>
+                        <span class="screen-reader-text">検索:</span>
+                        <input type="search" class="search-field" placeholder="商品を検索..." value="" name="s" />
+                    </label>
+                    <input type="submit" class="search-submit" value="search" />
+                </form>
+                <ul class="fsns-list">
+                    <li><a href="https://www.instagram.com/holylabel_official/" target="_blank">
+                        <img src="assets/images/icon-insta.png" alt="Instagram">
+                    </a></li>
+                    <li><a href="mailto:info@holylabel.com">
+                        <img src="assets/images/icon-mail.png" alt="Email">
+                    </a></li>
+                </ul>
+                <p class="tac txt-wht cr mb0">Copyright HOLY LABEL All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    
+    <script>
+        // HOLY LABEL SPA Router (BASE準拠版)
+        class HolyLabelRouter {
+            constructor() {
+                this.routes = {
+                    '': this.renderHomePage,
+                    'items': this.renderItemsPage,
+                    'items/new': this.renderItemsPage,
+                    'items/top': this.renderItemsPage,
+                    'items/bottom': this.renderItemsPage,
+                    'items/outwear': this.renderItemsPage,
+                    'items/accessory': this.renderItemsPage,
+                    'item-detail': this.renderItemDetailPage,
+                    'lookbook': this.renderLookbookPage,
+                    'about': this.renderAboutPage,
+                    'contact': this.renderContactPage
+                };
+                
+                this.swiper = null;
+                this.init();
+            }
+
+            init() {
+                this.handleRoute();
+                window.addEventListener('hashchange', () => this.handleRoute());
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // ハンバーガーメニュー
+                $(document).ready(() => {
+                    $('#js-humberger').on('click', function() {
+                        $(this).toggleClass('-active');
+                        $('.js-nav-area').toggleClass('-active');
+                        $('body').toggleClass('body-fixed');
+                    });
+
+                    // 展開メニュー
+                    $('.expand').on('click', function(e) {
+                        e.preventDefault();
+                        $(this).toggleClass('open');
+                        $(this).next('.ex-list').slideToggle();
+                    });
+
+                    // ナビゲーション外クリック時の閉じる処理
+                    $(document).on('click', function(e) {
+                        if (!$(e.target).closest('.header__nav-area, #js-humberger').length) {
+                            $('#js-humberger').removeClass('-active');
+                            $('.js-nav-area').removeClass('-active');
+                            $('body').removeClass('body-fixed');
+                        }
+                    });
+                });
+            }
+
+            stripHash(hash) {
+                return hash.replace('#', '') || '';
+            }
+
+            handleRoute() {
+                const path = this.stripHash(window.location.hash);
+                const route = this.routes[path] || this.routes[''];
+
+                // ページクラス設定
+                document.body.className = this.getPageClass(path);
+
+                // ルートハンドラー実行
+                route.call(this, { category: path.split('/')[1] || 'all' });
+            }
+
+            getPageClass(path) {
+                const baseClasses = 'wp-singular wp-theme-rosenkreuz no-sidebar';
+                if (!path) return baseClasses + ' page-home';
+                if (path.startsWith('items')) return baseClasses + ' page-items';
+                if (path === 'item-detail') return baseClasses + ' page-item-detail';
+                if (path === 'lookbook') return baseClasses + ' page-lookbook';
+                if (path === 'about') return baseClasses + ' page-about';
+                if (path === 'contact') return baseClasses + ' page-contact';
+                return baseClasses;
+            }
+
+            navigate(path) {
+                window.location.hash = path;
+            }
+
+            // ホームページレンダリング
+            renderHomePage() {
+                document.title = 'HOLY LABEL - ストリート × エレガンス';
+                const content = '<div class="main-sw">' +
+                    '<div class="swiper mySwiper">' +
+                        '<div class="swiper-wrapper">' +
+                            '<div class="swiper-slide">' +
+                                '<img src="assets/images/サンプル商品写真1.jpeg" alt="HOLY LABEL Collection">' +
+                            '</div>' +
+                            '<div class="swiper-slide">' +
+                                '<img src="assets/images/サンプル商品写真2.jpeg" alt="HOLY LABEL Collection">' +
+                            '</div>' +
+                            '<div class="swiper-slide">' +
+                                '<img src="assets/images/サンプル.png" alt="HOLY LABEL Collection">' +
+                            '</div>' +
+                            '<div class="swiper-slide">' +
+                                '<img src="assets/images/HLロゴ案2.png" alt="HOLY LABEL">' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+                
+                document.getElementById('app-content').innerHTML = content;
+                $('.site-main').addClass('top').css('padding-top', '0');
+                
+                // Swiper初期化
+                setTimeout(() => {
+                    if (this.swiper) {
+                        this.swiper.destroy(true, true);
+                    }
+                    this.swiper = new Swiper(".mySwiper", {
+                        effect: "fade",
+                        loop: true,
+                        autoplay: {
+                            delay: 4000,
+                            disableOnInteraction: false,
+                        },
+                        speed: 1000,
+                    });
+                }, 100);
+            }
+
+            // 商品一覧ページレンダリング
+            renderItemsPage(params) {
+                document.title = '商品一覧 - HOLY LABEL';
+                const category = params.category || 'all';
+                
+                const content = '<div class="page-header">' +
+                    '<div class="inner">' +
+                        '<h1 class="page-title">Items</h1>' +
+                        '<p class="page-description">ストリート × エレガンスの融合したコレクション</p>' +
+                    '</div>' +
+                '</div>' +
+
+                '<div class="filter-area">' +
+                    '<div class="inner">' +
+                        '<div class="filter-buttons">' +
+                            '<button class="filter-btn ' + (category === 'all' ? 'active' : '') + '" onclick="HolyLabelRouter.filterItems(\'all\')">All</button>' +
+                            '<button class="filter-btn ' + (category === 'new' ? 'active' : '') + '" onclick="HolyLabelRouter.filterItems(\'new\')">New Arrivals</button>' +
+                            '<button class="filter-btn ' + (category === 'top' ? 'active' : '') + '" onclick="HolyLabelRouter.filterItems(\'top\')">Top</button>' +
+                            '<button class="filter-btn ' + (category === 'bottom' ? 'active' : '') + '" onclick="HolyLabelRouter.filterItems(\'bottom\')">Bottom</button>' +
+                            '<button class="filter-btn ' + (category === 'outwear' ? 'active' : '') + '" onclick="HolyLabelRouter.filterItems(\'outwear\')">Outwear</button>' +
+                            '<button class="filter-btn ' + (category === 'accessory' ? 'active' : '') + '" onclick="HolyLabelRouter.filterItems(\'accessory\')">Accessory</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+
+                '{NotLoadItemsPage}' +
+                '<div class="inner">' +
+                    '<div class="tac" style="padding: 60px 0;">' +
+                        '<p style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.7);">商品を読み込んでいます...</p>' +
+                    '</div>' +
+                '</div>' +
+                '{/NotLoadItemsPage}' +
+
+                '{LoadItemsPage}' +
+                '<div class="inner">' +
+                    '<ul class="item-list">' +
+                        '<li data-category="new street">' +
+                            '<a href="#item-detail" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure>' +
+                                    '<img src="assets/images/サンプル商品写真1.jpeg" alt="Urban Street Collection">' +
+                                '</figure>' +
+                                '<div class="txt">' +
+                                    '<h3 class="ttl">Urban Street Collection</h3>' +
+                                    '<p class="price">¥18,700</p>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>' +
+                        '<li data-category="new elegant">' +
+                            '<a href="#item-detail" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure>' +
+                                    '<img src="assets/images/サンプル商品写真2.jpeg" alt="Elegant Line Series">' +
+                                '</figure>' +
+                                '<div class="txt">' +
+                                    '<h3 class="ttl">Elegant Line Series</h3>' +
+                                    '<p class="price">¥24,200</p>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>' +
+                        '<li data-category="top">' +
+                            '<a href="#item-detail" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure>' +
+                                    '<img src="assets/images/サンプル.png" alt="Signature Top">' +
+                                '</figure>' +
+                                '<div class="txt">' +
+                                    '<h3 class="ttl">Signature Top</h3>' +
+                                    '<p class="price">¥15,800</p>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>' +
+                        '<li data-category="bottom">' +
+                            '<a href="#item-detail" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure>' +
+                                    '<img src="assets/images/サンプル商品写真1.jpeg" alt="Street Bottom">' +
+                                '</figure>' +
+                                '<div class="txt">' +
+                                    '<h3 class="ttl">Street Bottom</h3>' +
+                                    '<p class="price">¥19,900</p>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>' +
+                        '<li data-category="outwear">' +
+                            '<a href="#item-detail" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure>' +
+                                    '<img src="assets/images/サンプル商品写真2.jpeg" alt="Premium Outwear">' +
+                                '</figure>' +
+                                '<div class="txt">' +
+                                    '<h3 class="ttl">Premium Outwear</h3>' +
+                                    '<p class="price">¥32,800</p>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>' +
+                        '<li data-category="accessory">' +
+                            '<a href="#item-detail" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure>' +
+                                    '<img src="assets/images/サンプル.png" alt="Essential Accessory">' +
+                                '</figure>' +
+                                '<div class="txt">' +
+                                    '<h3 class="ttl">Essential Accessory</h3>' +
+                                    '<p class="price">¥8,900</p>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>' +
+                '{/LoadItemsPage}';
+                
+                document.getElementById('app-content').innerHTML = content;
+                $('.site-main').removeClass('top').css('padding-top', '120px');
+                
+                // カテゴリフィルター適用
+                this.applyItemFilter(category);
+            }
+
+            applyItemFilter(category) {
+                const items = document.querySelectorAll('.item-list li');
+                items.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (category === 'all' || itemCategory.includes(category)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            filterItems(category) {
+                this.navigate(category === 'all' ? 'items' : 'items/' + category);
+            }
+
+            // コンタクトページレンダリング（完全版）
+            renderContactPage() {
+                document.title = 'Contact - HOLY LABEL';
+                const content = '<div class="page-header">' +
+                    '<div class="inner">' +
+                        '<h1 class="page-title">Contact</h1>' +
+                        '<p class="page-description">お問い合わせはこちらから</p>' +
+                    '</div>' +
+                '</div>' +
+
+                '<section style="padding: 80px 0;">' +
+                    '<div class="inner">' +
+                        '<div class="two-column" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">' +
+                            '<div style="background: rgba(255, 255, 255, 0.05); padding: 40px; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2rem; font-weight: 600; margin-bottom: 30px; color: #ffffff;">Get in Touch</h2>' +
+                                
+                                '<div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<div style="font-size: 14px; font-weight: 600; color: #ff6b35; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Address</div>' +
+                                    '<div style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">' +
+                                        '〒150-0001<br>' +
+                                        '東京都渋谷区神宮前4-26-28<br>' +
+                                        'HOLY LABEL本社' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<div style="font-size: 14px; font-weight: 600; color: #ff6b35; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Phone</div>' +
+                                    '<div style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">' +
+                                        '<a href="tel:+81-3-1234-5678" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">03-1234-5678</a>' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<div style="font-size: 14px; font-weight: 600; color: #ff6b35; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Email</div>' +
+                                    '<div style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">' +
+                                        '<a href="mailto:info@holylabel.com" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">info@holylabel.com</a>' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<div style="font-size: 14px; font-weight: 600; color: #ff6b35; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Business Hours</div>' +
+                                    '<div style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">' +
+                                        '月曜日 - 金曜日: 10:00 - 18:00<br>' +
+                                        '土曜日: 10:00 - 16:00<br>' +
+                                        '日曜日・祝日: 休業' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div style="margin-bottom: 30px;">' +
+                                    '<div style="font-size: 14px; font-weight: 600; color: #ff6b35; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Social Media</div>' +
+                                    '<div style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">' +
+                                        '<a href="https://www.instagram.com/holylabel_official/" target="_blank" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">Instagram</a><br>' +
+                                        '<a href="https://twitter.com/holylabel" target="_blank" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">Twitter</a><br>' +
+                                        '<a href="https://www.facebook.com/holylabel" target="_blank" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">Facebook</a>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="contact-form">' +
+                                '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2rem; font-weight: 600; margin-bottom: 30px; color: #ffffff;">Send Message</h2>' +
+                                
+                                '<form id="contactForm">' +
+                                    '<div class="form-group">' +
+                                        '<label class="form-label">お名前 *</label>' +
+                                        '<input type="text" name="name" required class="form-input">' +
+                                    '</div>' +
+
+                                    '<div class="form-group">' +
+                                        '<label class="form-label">メールアドレス *</label>' +
+                                        '<input type="email" name="email" required class="form-input">' +
+                                    '</div>' +
+
+                                    '<div class="form-group">' +
+                                        '<label class="form-label">お問い合わせ種類 *</label>' +
+                                        '<select name="subject" required class="form-select">' +
+                                            '<option value="">選択してください</option>' +
+                                            '<option value="商品について">商品について</option>' +
+                                            '<option value="配送について">配送について</option>' +
+                                            '<option value="返品・交換">返品・交換</option>' +
+                                            '<option value="サイズについて">サイズについて</option>' +
+                                            '<option value="その他">その他</option>' +
+                                        '</select>' +
+                                    '</div>' +
+
+                                    '<div class="form-group">' +
+                                        '<label class="form-label">メッセージ *</label>' +
+                                        '<input type="text" name="message" required placeholder="お問い合わせ内容をご記入ください" class="form-input">' +
+                                    '</div>' +
+
+                                    '<button type="submit" class="form-submit">Send Message</button>' +
+                                '</form>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>' +
+
+                '<section style="padding: 80px 0; background: rgba(255, 255, 255, 0.02);">' +
+                    '<div class="inner">' +
+                        '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2.5rem; font-weight: 600; text-align: center; margin-bottom: 60px; color: #ffffff;">Frequently Asked Questions</h2>' +
+                        
+                        '<div style="max-width: 800px; margin: 0 auto;">' +
+                            '<div class="faq-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">' +
+                                '<div class="faq-question" onclick="HolyLabelRouter.toggleFAQ(this)" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 500; color: #ffffff; margin: 0;">配送にはどのくらいの時間がかかりますか？</h3>' +
+                                    '<span class="faq-toggle" style="font-size: 20px; color: #ff6b35;">+</span>' +
+                                '</div>' +
+                                '<div class="faq-answer" style="padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; padding-bottom: 20px;">ご注文確定後、通常3-5営業日でお届けいたします。在庫状況や配送地域により前後する場合がございます。お急ぎの場合は、お問い合わせください。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="faq-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">' +
+                                '<div class="faq-question" onclick="HolyLabelRouter.toggleFAQ(this)" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 500; color: #ffffff; margin: 0;">返品・交換は可能ですか？</h3>' +
+                                    '<span class="faq-toggle" style="font-size: 20px; color: #ff6b35;">+</span>' +
+                                '</div>' +
+                                '<div class="faq-answer" style="padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; padding-bottom: 20px;">商品到着後7日以内であれば、未使用・タグ付きの状態で返品・交換を承ります。お客様都合による返品の場合、送料はお客様負担となります。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="faq-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">' +
+                                '<div class="faq-question" onclick="HolyLabelRouter.toggleFAQ(this)" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 500; color: #ffffff; margin: 0;">サイズ選びのアドバイスはありますか？</h3>' +
+                                    '<span class="faq-toggle" style="font-size: 20px; color: #ff6b35;">+</span>' +
+                                '</div>' +
+                                '<div class="faq-answer" style="padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; padding-bottom: 20px;">各商品ページに詳細なサイズ表を掲載しております。ご不明な点がございましたら、お気軽にお問い合わせください。専門スタッフがサイズ選びをサポートいたします。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="faq-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">' +
+                                '<div class="faq-question" onclick="HolyLabelRouter.toggleFAQ(this)" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 500; color: #ffffff; margin: 0;">海外発送は対応していますか？</h3>' +
+                                    '<span class="faq-toggle" style="font-size: 20px; color: #ff6b35;">+</span>' +
+                                '</div>' +
+                                '<div class="faq-answer" style="padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; padding-bottom: 20px;">現在、アジア各国への発送に対応しております。詳細な対応国や送料については、お問い合わせフォームよりご連絡ください。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="faq-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">' +
+                                '<div class="faq-question" onclick="HolyLabelRouter.toggleFAQ(this)" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 500; color: #ffffff; margin: 0;">ギフト包装は可能ですか？</h3>' +
+                                    '<span class="faq-toggle" style="font-size: 20px; color: #ff6b35;">+</span>' +
+                                '</div>' +
+                                '<div class="faq-answer" style="padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; padding-bottom: 20px;">有料でギフト包装を承っております。ご注文時に備考欄にてお申し付けください。特別なご要望がございましたら、事前にお問い合わせください。</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>';
+                
+                document.getElementById('app-content').innerHTML = content;
+                $('.site-main').removeClass('top').css('padding-top', '120px');
+
+                // フォームバリデーション
+                setTimeout(() => {
+                    const form = document.getElementById('contactForm');
+                    if (form) {
+                        form.addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            
+                            const name = form.name.value.trim();
+                            const email = form.email.value.trim();
+                            const subject = form.subject.value;
+                            const message = form.message.value.trim();
+                            
+                            if (!name || !email || !subject || !message) {
+                                alert('必須項目をすべて入力してください。');
+                                return;
+                            }
+                            
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(email)) {
+                                alert('正しいメールアドレスを入力してください。');
+                                return;
+                            }
+                            
+                            alert('お問い合わせを送信いたしました。ありがとうございます。');
+                            form.reset();
+                        });
+                    }
+                }, 100);
+            }
+
+            toggleFAQ(element) {
+                const faqItem = element.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                const answer = faqItem.querySelector('.faq-answer');
+                const toggle = faqItem.querySelector('.faq-toggle');
+                
+                document.querySelectorAll('.faq-item.active').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').style.maxHeight = '0';
+                        item.querySelector('.faq-toggle').style.transform = 'rotate(0deg)';
+                        item.querySelector('.faq-toggle').textContent = '+';
+                    }
+                });
+                
+                if (isActive) {
+                    faqItem.classList.remove('active');
+                    answer.style.maxHeight = '0';
+                    toggle.style.transform = 'rotate(0deg)';
+                    toggle.textContent = '+';
+                } else {
+                    faqItem.classList.add('active');
+                    answer.style.maxHeight = '200px';
+                    toggle.style.transform = 'rotate(45deg)';
+                    toggle.textContent = '+';
+                }
+            }
+
+            // ルックブックページレンダリング
+            renderLookbookPage() {
+                document.title = 'Look Book - HOLY LABEL';
+                const content = '<div class="page-header">' +
+                    '<div class="inner">' +
+                        '<h1 class="page-title">Look Book</h1>' +
+                        '<p class="page-description">ストリート × エレガンスのスタイルギャラリー</p>' +
+                    '</div>' +
+                '</div>' +
+
+                '<section style="padding: 60px 0;">' +
+                    '<div class="inner">' +
+                        '<div class="filter-area" style="padding: 40px 0; text-align: center;">' +
+                            '<div class="filter-buttons">' +
+                                '<button class="filter-btn active" onclick="HolyLabelRouter.filterLookbook(\'all\')">All</button>' +
+                                '<button class="filter-btn" onclick="HolyLabelRouter.filterLookbook(\'street\')">Street</button>' +
+                                '<button class="filter-btn" onclick="HolyLabelRouter.filterLookbook(\'elegant\')">Elegant</button>' +
+                                '<button class="filter-btn" onclick="HolyLabelRouter.filterLookbook(\'collection\')">Collection</button>' +
+                            '</div>' +
+                        '</div>' +
+
+                        '<div class="lookbook-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">' +
+                            '<div class="gallery-item" data-category="street collection" onclick="HolyLabelRouter.openLookbookModal(0)" style="cursor: pointer; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                                '<img src="assets/images/サンプル商品写真1.jpeg" alt="Street Collection" style="width: 100%; height: 400px; object-fit: cover; transition: transform 0.3s ease;">' +
+                                '<div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 30px 20px 20px; color: white;">' +
+                                    '<h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 5px;">Urban Street Look</h3>' +
+                                    '<p style="font-size: 0.9rem; opacity: 0.8;">ストリートカルチャーの本質</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="gallery-item" data-category="elegant collection" onclick="HolyLabelRouter.openLookbookModal(1)" style="cursor: pointer; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                                '<img src="assets/images/サンプル商品写真2.jpeg" alt="Elegant Collection" style="width: 100%; height: 400px; object-fit: cover; transition: transform 0.3s ease;">' +
+                                '<div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 30px 20px 20px; color: white;">' +
+                                    '<h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 5px;">Elegant Line</h3>' +
+                                    '<p style="font-size: 0.9rem; opacity: 0.8;">洗練されたエレガンス</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="gallery-item" data-category="street" onclick="HolyLabelRouter.openLookbookModal(2)" style="cursor: pointer; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                                '<img src="assets/images/サンプル.png" alt="Street Style" style="width: 100%; height: 400px; object-fit: cover; transition: transform 0.3s ease;">' +
+                                '<div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 30px 20px 20px; color: white;">' +
+                                    '<h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 5px;">Street Essence</h3>' +
+                                    '<p style="font-size: 0.9rem; opacity: 0.8;">アーバンライフスタイル</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div class="gallery-item" data-category="elegant" onclick="HolyLabelRouter.openLookbookModal(3)" style="cursor: pointer; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                                '<img src="assets/images/HLロゴ案2.png" alt="Brand Identity" style="width: 100%; height: 400px; object-fit: cover; transition: transform 0.3s ease;">' +
+                                '<div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 30px 20px 20px; color: white;">' +
+                                    '<h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 5px;">Brand Identity</h3>' +
+                                    '<p style="font-size: 0.9rem; opacity: 0.8;">HOLY LABELの世界観</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>' +
+
+                '<div id="lookbook-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center;">' +
+                    '<div style="position: relative; max-width: 90%; max-height: 90%;">' +
+                        '<img id="modal-image" src="" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain;">' +
+                        '<button onclick="HolyLabelRouter.closeLookbookModal()" style="position: absolute; top: -40px; right: 0; background: none; border: none; color: white; font-size: 30px; cursor: pointer;">×</button>' +
+                    '</div>' +
+                '</div>';
+                
+                document.getElementById('app-content').innerHTML = content;
+                $('.site-main').removeClass('top').css('padding-top', '120px');
+
+                // ギャラリーホバーエフェクト
+                setTimeout(() => {
+                    const galleryItems = document.querySelectorAll('.gallery-item');
+                    galleryItems.forEach(item => {
+                        item.addEventListener('mouseenter', function() {
+                            this.style.transform = 'translateY(-10px)';
+                            this.style.borderColor = 'rgba(255, 107, 53, 0.5)';
+                            this.querySelector('img').style.transform = 'scale(1.05)';
+                        });
+                        item.addEventListener('mouseleave', function() {
+                            this.style.transform = 'translateY(0)';
+                            this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                            this.querySelector('img').style.transform = 'scale(1)';
+                        });
+                    });
+                }, 100);
+            }
+
+            filterLookbook(category) {
+                const items = document.querySelectorAll('.gallery-item');
+                const buttons = document.querySelectorAll('.filter-btn');
+                
+                buttons.forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                items.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (category === 'all' || itemCategory.includes(category)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            openLookbookModal(index) {
+                const images = [
+                    'assets/images/サンプル商品写真1.jpeg',
+                    'assets/images/サンプル商品写真2.jpeg',
+                    'assets/images/サンプル.png',
+                    'assets/images/HLロゴ案2.png'
+                ];
+                
+                const modal = document.getElementById('lookbook-modal');
+                const modalImage = document.getElementById('modal-image');
+                
+                modalImage.src = images[index];
+                modal.style.display = 'flex';
+            }
+
+            closeLookbookModal() {
+                document.getElementById('lookbook-modal').style.display = 'none';
+            }
+
+            // アバウトページレンダリング（完全版）
+            renderAboutPage() {
+                document.title = 'About - HOLY LABEL';
+                const content = '<div class="page-header">' +
+                    '<div class="inner">' +
+                        '<h1 class="page-title">About</h1>' +
+                        '<p class="page-description">ストリート × エレガンスを追求するブランドストーリー</p>' +
+                    '</div>' +
+                '</div>' +
+
+                '<section style="padding: 80px 0;">' +
+                    '<div class="inner">' +
+                        '<div class="about-two-column" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 80px;">' +
+                            '<div>' +
+                                '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2.5rem; font-weight: 600; margin-bottom: 30px; color: #ffffff;">Our Story</h2>' +
+                                '<p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8; margin-bottom: 20px;">' +
+                                    'HOLY LABELは2019年、東京の街角から始まりました。ストリートカルチャーの自由さとエレガンスの洗練さを融合させる、新しいファッションの形を求めて。' +
+                                '</p>' +
+                                '<p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8;">' +
+                                    '都市の喧騒の中で生きる現代人に向けて、日常に寄り添いながらも特別感を演出するアイテムを提案し続けています。' +
+                                '</p>' +
+                            '</div>' +
+                            '<div>' +
+                                '<img src="assets/images/HLロゴ案2.png" alt="HOLY LABEL ブランドストーリー" style="width: 100%; height: 400px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                            '</div>' +
+                        '</div>' +
+
+                        '<div class="about-two-column" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 80px;">' +
+                            '<div>' +
+                                '<img src="assets/images/サンプル商品写真1.jpeg" alt="HOLY LABEL クラフトマンシップ" style="width: 100%; height: 400px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                            '</div>' +
+                            '<div>' +
+                                '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2.5rem; font-weight: 600; margin-bottom: 30px; color: #ffffff;">Philosophy</h2>' +
+                                '<p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8; margin-bottom: 20px;">' +
+                                    '「聖なるラベル」という名前に込められた想いは、着る人それぞれの個性を神聖なものとして尊重し、その人らしさを最大限に引き出すこと。' +
+                                '</p>' +
+                                '<p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8;">' +
+                                    'ファッションを通じて、自分自身の価値を再発見し、自信を持って歩んでいけるようなアイテムを創造することが私たちの使命です。' +
+                                '</p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>' +
+
+                '<section style="padding: 80px 0; background: rgba(255, 255, 255, 0.02);">' +
+                    '<div class="inner">' +
+                        '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2.5rem; font-weight: 600; text-align: center; margin-bottom: 60px; color: #ffffff;">Our Values</h2>' +
+                        '<div class="about-philosophy" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">' +
+                            '<div style="text-align: center; padding: 40px 30px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                                '<div style="width: 80px; height: 80px; background: #ff6b35; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #ffffff;">✦</div>' +
+                                '<h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 15px; color: #ffffff;">Freedom</h3>' +
+                                '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">ストリートカルチャーが持つ自由な精神を大切にし、固定概念にとらわれない自由な発想でアイテムを創造します。</p>' +
+                            '</div>' +
+                            '<div style="text-align: center; padding: 40px 30px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                                '<div style="width: 80px; height: 80px; background: #ff6b35; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #ffffff;">◈</div>' +
+                                '<h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 15px; color: #ffffff;">Innovation</h3>' +
+                                '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">常に新しい素材や技術を取り入れ、伝統的なエレガンスに革新的な要素を加えたアイテムを提案します。</p>' +
+                            '</div>' +
+                            '<div style="text-align: center; padding: 40px 30px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">' +
+                                '<div style="width: 80px; height: 80px; background: #ff6b35; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #ffffff;">⬢</div>' +
+                                '<h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 15px; color: #ffffff;">Quality</h3>' +
+                                '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">厳選された素材と丁寧な製造工程により、長く愛用していただける高品質なアイテムをお届けします。</p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>' +
+
+                '<section style="padding: 80px 0;">' +
+                    '<div class="inner">' +
+                        '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2.5rem; font-weight: 600; text-align: center; margin-bottom: 60px; color: #ffffff;">Our Journey</h2>' +
+                        '<div style="position: relative; max-width: 800px; margin: 0 auto;">' +
+                            '<div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255, 107, 53, 0.3); transform: translateX(-50%);"></div>' +
+                            
+                            '<div style="position: relative; margin-bottom: 50px; width: 50%; left: 0; padding-right: 30px; text-align: right;">' +
+                                '<div style="position: absolute; top: 20px; right: -10px; width: 20px; height: 20px; background: #ff6b35; border-radius: 50%; border: 4px solid #000;"></div>' +
+                                '<div style="font-size: 1.2rem; font-weight: 600; color: #ff6b35; margin-bottom: 10px;">2019</div>' +
+                                '<div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: #ffffff;">ブランド設立</h3>' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">東京・原宿にて HOLY LABEL 設立。ストリート × エレガンスのコンセプトで第一歩を踏み出す。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div style="position: relative; margin-bottom: 50px; width: 50%; left: 50%; padding-left: 30px;">' +
+                                '<div style="position: absolute; top: 20px; left: -10px; width: 20px; height: 20px; background: #ff6b35; border-radius: 50%; border: 4px solid #000;"></div>' +
+                                '<div style="font-size: 1.2rem; font-weight: 600; color: #ff6b35; margin-bottom: 10px;">2020</div>' +
+                                '<div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: #ffffff;">初コレクション発表</h3>' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">「Urban Street Collection」を発表。都市的なデザインとエレガントな要素の融合が話題となる。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div style="position: relative; margin-bottom: 50px; width: 50%; left: 0; padding-right: 30px; text-align: right;">' +
+                                '<div style="position: absolute; top: 20px; right: -10px; width: 20px; height: 20px; background: #ff6b35; border-radius: 50%; border: 4px solid #000;"></div>' +
+                                '<div style="font-size: 1.2rem; font-weight: 600; color: #ff6b35; margin-bottom: 10px;">2022</div>' +
+                                '<div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: #ffffff;">海外展開開始</h3>' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">アジア各国での販売を開始。国際的なブランドとしての地位を確立。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div style="position: relative; margin-bottom: 50px; width: 50%; left: 50%; padding-left: 30px;">' +
+                                '<div style="position: absolute; top: 20px; left: -10px; width: 20px; height: 20px; background: #ff6b35; border-radius: 50%; border: 4px solid #000;"></div>' +
+                                '<div style="font-size: 1.2rem; font-weight: 600; color: #ff6b35; margin-bottom: 10px;">2024</div>' +
+                                '<div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: #ffffff;">サステナブル化推進</h3>' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">環境に配慮した素材の使用と、持続可能な製造プロセスの導入を開始。</p>' +
+                                '</div>' +
+                            '</div>' +
+
+                            '<div style="position: relative; margin-bottom: 50px; width: 50%; left: 0; padding-right: 30px; text-align: right;">' +
+                                '<div style="position: absolute; top: 20px; right: -10px; width: 20px; height: 20px; background: #ff6b35; border-radius: 50%; border: 4px solid #000;"></div>' +
+                                '<div style="font-size: 1.2rem; font-weight: 600; color: #ff6b35; margin-bottom: 10px;">2025</div>' +
+                                '<div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">' +
+                                    '<h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: #ffffff;">新章への挑戦</h3>' +
+                                    '<p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">次世代のファッションを見据えた新しいコレクションの企画・開発に着手。</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>' +
+
+                '<section style="padding: 80px 0; text-align: center; background: rgba(255, 107, 53, 0.1); border-top: 1px solid rgba(255, 107, 53, 0.3);">' +
+                    '<div class="inner">' +
+                        '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2rem; font-weight: 600; margin-bottom: 20px; color: #ffffff;">Join Our Journey</h2>' +
+                        '<p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">' +
+                            'HOLY LABELと共に、あなた自身のスタイルを見つけませんか。<br>' +
+                            'ストリート × エレガンスの世界で、新しい自分を発見してください。' +
+                        '</p>' +
+                        '<a href="#contact" onclick="HolyLabelRouter.navigate(\'contact\')" style="display: inline-block; background: #ff6b35; color: #ffffff; padding: 15px 40px; text-decoration: none; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s ease;">Contact Us</a>' +
+                    '</div>' +
+                '</section>';
+                
+                document.getElementById('app-content').innerHTML = content;
+                $('.site-main').removeClass('top').css('padding-top', '120px');
+            }
+
+            // 商品詳細ページレンダリング（完全版）
+            renderItemDetailPage() {
+                document.title = 'Urban Street Collection - HOLY LABEL';
+                const content = '<div style="padding: 30px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">' +
+                    '<div class="inner">' +
+                        '<div style="display: flex; align-items: center; gap: 15px; font-size: 14px;">' +
+                            '<a href="#" onclick="HolyLabelRouter.navigate(\'\')" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">HOME</a>' +
+                            '<span style="opacity: 0.5;">></span>' +
+                            '<a href="#items" onclick="HolyLabelRouter.navigate(\'items\')" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">ITEMS</a>' +
+                            '<span style="opacity: 0.5;">></span>' +
+                            '<span>Urban Street Collection</span>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+
+                '{ItemPage}' +
+                '<section style="padding: 60px 0;">' +
+                    '<div class="inner">' +
+                        '<div class="product-detail-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">' +
+                            '<div style="position: sticky; top: 140px;">' +
+                                '<img id="main-product-image" src="assets/images/サンプル商品写真1.jpeg" alt="Urban Street Collection" style="width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">' +
+                                '<div class="product-thumbnails" style="display: flex; gap: 15px; overflow-x: auto; padding: 10px 0;">' +
+                                    '<img onclick="HolyLabelRouter.changeProductImage(this)" src="assets/images/サンプル商品写真1.jpeg" alt="Urban Street Collection" style="width: 80px; height: 80px; object-fit: cover; border: 1px solid #ff6b35; cursor: pointer; transition: all 0.3s ease;" class="active">' +
+                                    '<img onclick="HolyLabelRouter.changeProductImage(this)" src="assets/images/サンプル商品写真2.jpeg" alt="Urban Street Collection" style="width: 80px; height: 80px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease;">' +
+                                    '<img onclick="HolyLabelRouter.changeProductImage(this)" src="assets/images/サンプル.png" alt="Urban Street Collection" style="width: 80px; height: 80px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease;">' +
+                                    '<img onclick="HolyLabelRouter.changeProductImage(this)" src="assets/images/HLロゴ案2.png" alt="Urban Street Collection" style="width: 80px; height: 80px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease;">' +
+                                '</div>' +
+                            '</div>' +
+                            
+                            '<div style="padding: 20px 0;">' +
+                                '<h1 style="font-family: \'Playfair Display\', serif; font-size: 2.5rem; font-weight: 600; margin-bottom: 20px; color: #ffffff;">Urban Street Collection</h1>' +
+                                '<div style="font-size: 2rem; font-weight: 700; color: #ff6b35; margin-bottom: 30px;">¥18,700</div>' +
+                                '<div style="font-size: 16px; margin-bottom: 30px; color: rgba(255, 255, 255, 0.7);">在庫：残り 5 点</div>' +
+                                
+                                '<div style="font-size: 16px; line-height: 1.8; margin-bottom: 40px; color: rgba(255, 255, 255, 0.8);">' +
+                                    'ストリートカルチャーとエレガンスを融合させた、HOLY LABELの代表的なコレクション。都市の動きと洗練されたデザインが調和した、現代のライフスタイルにフィットするアイテムです。<br><br>' +
+                                    '高品質な素材を使用し、快適な着心地と耐久性を実現。カジュアルからセミフォーマルまで、幅広いシーンでお使いいただけます。' +
+                                '</div>' +
+
+                                '<div style="margin-bottom: 40px;">' +
+                                    '<div style="margin-bottom: 30px;">' +
+                                        '<label style="display: block; font-size: 16px; font-weight: 500; margin-bottom: 15px; color: #ffffff;">カラー</label>' +
+                                        '<select style="width: 100%; padding: 15px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; font-size: 16px;">' +
+                                            '<option value="black">ブラック</option>' +
+                                            '<option value="white">ホワイト</option>' +
+                                            '<option value="gray">グレー</option>' +
+                                        '</select>' +
+                                    '</div>' +
+
+                                    '<div style="margin-bottom: 30px;">' +
+                                        '<label style="display: block; font-size: 16px; font-weight: 500; margin-bottom: 15px; color: #ffffff;">サイズ</label>' +
+                                        '<div class="size-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">' +
+                                            '<button onclick="HolyLabelRouter.selectSize(this)" style="padding: 12px 20px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: #ffffff; cursor: pointer; min-width: 60px; text-align: center; transition: all 0.3s ease;">XS</button>' +
+                                            '<button onclick="HolyLabelRouter.selectSize(this)" style="padding: 12px 20px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: #ffffff; cursor: pointer; min-width: 60px; text-align: center; transition: all 0.3s ease;">S</button>' +
+                                            '<button onclick="HolyLabelRouter.selectSize(this)" style="padding: 12px 20px; border: 1px solid #ff6b35; background: #ff6b35; color: #ffffff; cursor: pointer; min-width: 60px; text-align: center; transition: all 0.3s ease;" class="selected">M</button>' +
+                                            '<button onclick="HolyLabelRouter.selectSize(this)" style="padding: 12px 20px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: #ffffff; cursor: pointer; min-width: 60px; text-align: center; transition: all 0.3s ease;">L</button>' +
+                                            '<button onclick="HolyLabelRouter.selectSize(this)" style="padding: 12px 20px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: #ffffff; cursor: pointer; min-width: 60px; text-align: center; transition: all 0.3s ease;">XL</button>' +
+                                            '<button style="padding: 12px 20px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: rgba(255, 255, 255, 0.3); cursor: not-allowed; min-width: 60px; text-align: center; opacity: 0.3;" disabled>XXL</button>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+
+                                '<div style="margin-bottom: 50px;">' +
+                                    '<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 30px;">' +
+                                        '<span style="font-size: 16px; color: #ffffff;">数量:</span>' +
+                                        '<div style="display: flex; align-items: center; border: 1px solid rgba(255, 255, 255, 0.3);">' +
+                                            '<button onclick="HolyLabelRouter.changeQuantity(-1)" style="background: transparent; border: none; color: #ffffff; padding: 10px 15px; cursor: pointer; transition: background 0.3s ease;">-</button>' +
+                                            '<input type="number" value="1" min="1" max="5" id="quantityInput" style="background: transparent; border: none; color: #ffffff; text-align: center; width: 60px; padding: 10px 5px;">' +
+                                            '<button onclick="HolyLabelRouter.changeQuantity(1)" style="background: transparent; border: none; color: #ffffff; padding: 10px 15px; cursor: pointer; transition: background 0.3s ease;">+</button>' +
+                                        '</div>' +
+                                    '</div>' +
+
+                                    '<button style="width: 100%; background: #ff6b35; border: none; color: #ffffff; padding: 20px; font-size: 18px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; transition: all 0.3s ease;">カートに追加</button>' +
+                                    '<button style="width: 100%; background: transparent; border: 2px solid #ff6b35; color: #ff6b35; padding: 18px; font-size: 16px; font-weight: 500; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">今すぐ購入</button>' +
+                                '</div>' +
+
+                                '<div style="margin-bottom: 50px;">' +
+                                    '<h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; color: #ffffff; border-bottom: 2px solid #ff6b35; padding-bottom: 10px;">商品詳細</h3>' +
+                                    '<table style="width: 100%; border-collapse: collapse;">' +
+                                        '<tr>' +
+                                            '<th style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; width: 30%; color: rgba(255, 255, 255, 0.8); font-weight: 500;">素材</th>' +
+                                            '<td style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; color: #ffffff;">コットン 100%</td>' +
+                                        '</tr>' +
+                                        '<tr>' +
+                                            '<th style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; width: 30%; color: rgba(255, 255, 255, 0.8); font-weight: 500;">生産国</th>' +
+                                            '<td style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; color: #ffffff;">日本</td>' +
+                                        '</tr>' +
+                                        '<tr>' +
+                                            '<th style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; width: 30%; color: rgba(255, 255, 255, 0.8); font-weight: 500;">洗濯方法</th>' +
+                                            '<td style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; color: #ffffff;">手洗い推奨</td>' +
+                                        '</tr>' +
+                                        '<tr>' +
+                                            '<th style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; width: 30%; color: rgba(255, 255, 255, 0.8); font-weight: 500;">モデル着用サイズ</th>' +
+                                            '<td style="padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; color: #ffffff;">M (身長: 175cm)</td>' +
+                                        '</tr>' +
+                                    '</table>' +
+                                '</div>' +
+
+                                '{ItemAttentionTag}' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>' +
+                '{/ItemPage}' +
+
+                '<section style="padding: 80px 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">' +
+                    '<div class="inner">' +
+                        '<h2 style="font-family: \'Playfair Display\', serif; font-size: 2rem; font-weight: 600; text-align: center; margin-bottom: 50px; color: #ffffff;">Related Items</h2>' +
+                        '<div class="related-products" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">' +
+                            '<div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; cursor: pointer;" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure style="margin: 0; overflow: hidden;">' +
+                                    '<img src="assets/images/サンプル商品写真2.jpeg" alt="Elegant Line Series" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.3s ease;">' +
+                                '</figure>' +
+                                '<div style="padding: 20px;">' +
+                                    '<h3 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #ffffff;">Elegant Line Series</h3>' +
+                                    '<p style="font-size: 1.1rem; font-weight: 600; color: #ff6b35;">¥24,200</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; cursor: pointer;" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure style="margin: 0; overflow: hidden;">' +
+                                    '<img src="assets/images/サンプル.png" alt="Signature Collection" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.3s ease;">' +
+                                '</figure>' +
+                                '<div style="padding: 20px;">' +
+                                    '<h3 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #ffffff;">Signature Collection</h3>' +
+                                    '<p style="font-size: 1.1rem; font-weight: 600; color: #ff6b35;">¥32,800</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; cursor: pointer;" onclick="HolyLabelRouter.navigate(\'item-detail\')">' +
+                                '<figure style="margin: 0; overflow: hidden;">' +
+                                    '<img src="assets/images/サンプル商品写真1.jpeg" alt="Street Basic" style="width: 100%; height: 250px; object-fit: cover; transition: transform 0.3s ease;">' +
+                                '</figure>' +
+                                '<div style="padding: 20px;">' +
+                                    '<h3 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #ffffff;">Street Basic</h3>' +
+                                    '<p style="font-size: 1.1rem; font-weight: 600; color: #ff6b35;">¥15,400</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</section>';
+                
+                document.getElementById('app-content').innerHTML = content;
+                $('.site-main').removeClass('top').css('padding-top', '120px');
+            }
+
+            // 商品詳細ページ用インタラクティブ機能
+            changeProductImage(thumbnail) {
+                const mainImage = document.getElementById('main-product-image');
+                mainImage.src = thumbnail.src;
+                
+                document.querySelectorAll('.product-thumbnails img').forEach(img => {
+                    img.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    img.classList.remove('active');
+                });
+                thumbnail.style.borderColor = '#ff6b35';
+                thumbnail.classList.add('active');
+            }
+
+            selectSize(button) {
+                if (button.disabled) return;
+                
+                document.querySelectorAll('.size-buttons button').forEach(btn => {
+                    btn.style.backgroundColor = 'transparent';
+                    btn.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    btn.classList.remove('selected');
+                });
+                
+                button.style.backgroundColor = '#ff6b35';
+                button.style.borderColor = '#ff6b35';
+                button.classList.add('selected');
+            }
+
+            changeQuantity(change) {
+                const quantityInput = document.getElementById('quantityInput');
+                if (!quantityInput) return;
+                
+                const currentValue = parseInt(quantityInput.value);
+                const newValue = currentValue + change;
+                
+                if (newValue >= 1 && newValue <= 5) {
+                    quantityInput.value = newValue;
+                }
+            }
+        }
+
+        // グローバル関数として追加
+        window.toggleMenu = function() {
+            const navArea = document.querySelector('.header__nav-area');
+            const hamburger = document.querySelector('.humberger');
+            
+            if (navArea && hamburger) {
+                navArea.classList.toggle('-active');
+                hamburger.classList.toggle('-active');
+            }
+        };
+
+        window.closeMenu = function() {
+            const navArea = document.querySelector('.header__nav-area');
+            const hamburger = document.querySelector('.humberger');
+            
+            if (navArea && hamburger) {
+                navArea.classList.remove('-active');
+                hamburger.classList.remove('-active');
+            }
+        };
+
+        // ナビゲーションリンククリック時の処理
+        window.navigateAndClose = function(path) {
+            window.closeMenu();
+            if (window.HolyLabelRouter) {
+                window.HolyLabelRouter.navigate(path);
+            }
+        };
+
+        // ルーター初期化
+        const router = new HolyLabelRouter();
+        window.HolyLabelRouter = router;
+    </script>
+</body>
+</html> 

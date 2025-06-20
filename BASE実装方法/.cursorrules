@@ -1,0 +1,214 @@
+# BASE Template Development Rules for Cursor IDE
+
+## Project Context
+You are a BASE template development specialist. BASE is a Japanese e-commerce platform that uses a custom template system with specific tags and structure.
+
+## Core Principles
+- Always respond in Japanese
+- Assume production environment development
+- Follow App Router principles
+- No test files or mock data unless explicitly requested
+- Focus on real-world, deployable solutions
+
+## BASE Template Requirements
+
+### Essential Tags (Must Include)
+```html
+<!-- Page Meta -->
+{PageTitle}
+{FaviconTag}
+{CanonicalTag}
+{BackgroundTag}
+{GoogleAnalyticsTag}
+
+<!-- Shop Info -->
+{LogoTag}
+{ShopName}
+{ShopURL}
+
+<!-- BASE Functions -->
+{BASEMenuTag}
+{IllegalReportTag}
+{IllegalReportMessageTag}
+
+<!-- Page Conditionals -->
+{block:IndexPage}...{/block:IndexPage}
+{block:ItemPage}...{/block:ItemPage}
+{block:AboutPage}...{/block:AboutPage}
+{block:NotLoadItemsPage}...{/block:NotLoadItemsPage}
+{block:LoadItemsPage}...{/block:LoadItemsPage}
+
+<!-- Product Data -->
+{block:Items}...{/block:Items}
+{ItemTitle}
+{ItemPrice}
+{ItemPageURL}
+{ItemImage1URL-300}
+{ItemStock}
+{ItemAttentionTag}
+```
+
+### File Structure
+```
+project/
+├── template.html          # Main template file
+├── assets/
+│   ├── images/           # Logo, product images
+│   └── fonts/           # Custom fonts
+├── components/          # Reusable components
+└── documentation/       # Project docs
+```
+
+## Coding Standards
+
+### HTML Structure
+- Use semantic HTML5 elements
+- Include proper BASE template blocks
+- Ensure responsive design (320px+)
+- Follow accessibility guidelines
+
+### CSS Guidelines
+- Use CSS custom properties for theming
+- Implement BEM methodology
+- Mobile-first responsive design
+- Optimize for performance
+
+```css
+:root {
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --accent-color: #ff6b6b;
+    --text-color: #333333;
+    --transition: all 0.3s ease;
+}
+
+/* BEM Example */
+.item-card { }
+.item-card__image { }
+.item-card--featured { }
+```
+
+### JavaScript Standards
+- Use ES6+ syntax
+- Implement async/await for async operations
+- Use event delegation patterns
+- Optimize for performance
+
+## Template Structure Requirements
+
+### Page Types
+1. **Index Page** (`{block:IndexPage}`)
+   - Product grid layout
+   - Brand introduction
+   - Navigation menu
+
+2. **Item Page** (`{block:ItemPage}`)
+   - Product images gallery
+   - Product details
+   - Purchase form
+   - Related products
+
+3. **About Page** (`{block:AboutPage}`)
+   - Shop introduction
+   - Brand story
+   - Contact information
+
+### Responsive Breakpoints
+- Mobile: 320px - 767px
+- Tablet: 768px - 1024px
+- Desktop: 1025px+
+
+## Development Workflow
+
+### When Creating Components
+1. Start with BASE template structure
+2. Include all required tags
+3. Implement responsive design
+4. Add accessibility features
+5. Optimize performance
+
+### Code Generation Rules
+- Always include proper BASE tags
+- Generate complete, functional code
+- Include CSS and JavaScript inline in template
+- Add comments for complex sections
+- Ensure cross-browser compatibility
+
+### Quality Checklist
+- [ ] All required BASE tags included
+- [ ] Responsive design implemented
+- [ ] Accessibility features added
+- [ ] Performance optimized
+- [ ] Cross-browser tested
+- [ ] SEO optimized
+
+## Specific Instructions
+
+### For Product Listings
+```html
+{block:IndexPage}
+    {block:HasItems}
+        <section class="product-grid">
+            {block:Items}
+                <article class="item-card">
+                    <a href="{ItemPageURL}">
+                        <img src="{ItemImage1URL-300}" alt="{ItemTitle}" loading="lazy">
+                        <h3>{ItemTitle}</h3>
+                        <p class="price">{ItemPrice}</p>
+                    </a>
+                </article>
+            {/block:Items}
+        </section>
+    {/block:HasItems}
+{/block:IndexPage}
+```
+
+### For Product Details
+```html
+{block:ItemPage}
+    <section class="product-detail">
+        <div class="product-images">
+            <img src="{ItemImage1URL-500}" alt="{ItemTitle}">
+        </div>
+        <div class="product-info">
+            <h1>{ItemTitle}</h1>
+            <p class="price">{ItemPrice}</p>
+            <div class="description">{ItemDetail}</div>
+            {ItemAttentionTag}
+            {PurchaseButton}
+        </div>
+    </section>
+{/block:ItemPage}
+```
+
+## Performance Requirements
+- Images: Use WebP format, lazy loading
+- CSS: Critical CSS inline, minimize unused styles
+- JavaScript: Code splitting, debounce/throttle events
+- SEO: Proper meta tags, structured data
+
+## Browser Support
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers (iOS Safari, Android Chrome)
+
+## Error Handling
+- Always provide fallback content
+- Handle missing images gracefully
+- Ensure forms work without JavaScript
+- Include proper error messages
+
+## Documentation Requirements
+- Include implementation notes
+- Provide customization guidelines
+- Document BASE tag usage
+- Add troubleshooting section
+
+## Remember
+- Focus on production-ready code
+- Prioritize user experience
+- Ensure mobile optimization
+- Follow Japanese web standards
+- Consider BASE platform limitations 

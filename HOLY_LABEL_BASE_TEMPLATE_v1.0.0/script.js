@@ -1,99 +1,181 @@
 // HOLY REBEL BASEテンプレート JavaScript
+// Inspired by Rosen Kreuz interaction with HOLY REBEL enhancements
 
-document.addEventListener('DOMContentLoaded', function() {
-    // ハンバーガーメニューの制御
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
-    const menuClose = document.getElementById('menuClose');
+jQuery(document).ready(function ($) {
     
-    // メニューを開く
-    function openMenu() {
-        hamburgerMenu.classList.add('active');
-        hamburgerBtn.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    // メニューを閉じる
-    function closeMenu() {
-        hamburgerMenu.classList.remove('active');
-        hamburgerBtn.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    // イベントリスナー
-    if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', function() {
-            if (hamburgerMenu.classList.contains('active')) {
-                closeMenu();
-            } else {
-                openMenu();
+    // Smooth scroll
+    $('a[href^="#"]').click(function () {
+        if (!$(this).hasClass("filter_lbox-link")) {
+            var speed = 800;
+            var href = $(this).attr("href");
+            var target = $(href == "#" || href == "" ? "html" : href);
+            if (target.length) {
+                var position = target.offset().top - 70; // ヘッダー分のオフセット
+                $("body,html").animate(
+                    {
+                        scrollTop: position,
+                    },
+                    speed,
+                    "swing"
+                );
             }
-        });
-    }
-    
-    if (menuOverlay) {
-        menuOverlay.addEventListener('click', closeMenu);
-    }
-    
-    if (menuClose) {
-        menuClose.addEventListener('click', closeMenu);
-    }
-    
-    // ESCキーでメニューを閉じる
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && hamburgerMenu.classList.contains('active')) {
-            closeMenu();
+            return false;
         }
     });
-    
-    // スムーススクロール
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                closeMenu(); // メニューが開いていれば閉じる
-            }
-        });
-    });
-    
-    // 商品カードのホバーアニメーション
-    const itemCards = document.querySelectorAll('.item-card');
-    itemCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-    
-    // スクロール時のヘッダー背景変更
-    let lastScrollTop = 0;
-    const header = document.querySelector('.header');
-    
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            header.style.background = 'rgba(11, 16, 29, 0.98)';
-            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+
+    // ハンバーガーメニューのクリックイベント（Rosen Kreuz風）
+    $("#js-humberger").click(function () {
+        $(this).toggleClass("-active");
+        $("#sp-gmenu-area").toggleClass("-active");
+
+        if ($(this).hasClass("-active")) {
+            $("body").addClass("body-fixed");
+            $("html").css("overflow", "hidden");
         } else {
-            header.style.background = 'rgba(11, 16, 29, 0.95)';
-            header.style.boxShadow = 'none';
+            $("body").removeClass("body-fixed");
+            $("html").css("overflow", "auto");
         }
-        
-        lastScrollTop = scrollTop;
+        var expanded = $(this).attr("aria-expanded") === "true" || false;
+        $(this).attr("aria-expanded", !expanded);
     });
-    
+
+    // メニュー外をクリックした際の閉じる処理
+    $(document).click(function (e) {
+        if (!$(e.target).closest("#js-humberger, #sp-gmenu-area").length) {
+            if ($("#js-humberger").hasClass("-active")) {
+                $("#js-humberger").removeClass("-active");
+                $("#sp-gmenu-area").removeClass("-active");
+                $("body").removeClass("body-fixed");
+                $("html").css("overflow", "auto");
+                $("#js-humberger").attr("aria-expanded", false);
+            }
+        }
+    });
+
+    // 展開メニューの処理
+    $(".expand").on("click", function (e) {
+        e.preventDefault();
+        $(this).toggleClass("open");
+        $(this).next(".ex-list").slideToggle();
+    });
+
+    // 商品フィルター機能
+    $('.filter-btn').on('click', function() {
+        const category = $(this).data('category');
+        
+        // アクティブボタンの切り替え
+        $('.filter-btn').removeClass('active');
+        $(this).addClass('active');
+        
+        // 商品のフィルタリング
+        filterItems(category);
+    });
+
+    // ナビゲーションからのフィルター
+    $('a[data-category]').on('click', function(e) {
+        e.preventDefault();
+        const category = $(this).data('category');
+        
+        // メニューを閉じる
+        closeMenu();
+        
+        // 商品セクションまでスクロール
+        $('html, body').animate({
+            scrollTop: $('#items').offset().top - 70
+        }, 800);
+        
+        // フィルターボタンを更新
+        $('.filter-btn').removeClass('active');
+        $(`.filter-btn[data-category="${category}"]`).addClass('active');
+        
+        // 商品をフィルタリング
+        setTimeout(() => {
+            filterItems(category);
+        }, 500);
+    });
+
+    // 商品フィルタリング関数
+    function filterItems(category) {
+        const items = $('.item-card');
+        
+        items.each(function() {
+            const $item = $(this);
+            const itemCategory = $item.data('category');
+            
+            $item.addClass('filtering-out');
+            
+            setTimeout(() => {
+                if (category === 'all' || itemCategory === category) {
+                    $item.show().removeClass('filtering-out').addClass('filtering-in');
+                } else {
+                    $item.hide().removeClass('filtering-out filtering-in');
+                }
+            }, 300);
+        });
+        
+        // アニメーションクリーンアップ
+        setTimeout(() => {
+            items.removeClass('filtering-in');
+        }, 800);
+    }
+
+    // メニューを閉じる関数
+    function closeMenu() {
+        $("#js-humberger").removeClass("-active");
+        $("#sp-gmenu-area").removeClass("-active");
+        $("body").removeClass("body-fixed");
+        $("html").css("overflow", "auto");
+        $("#js-humberger").attr("aria-expanded", false);
+    }
+
+    // Load Moreボタンの処理
+    $('#loadMoreBtn').on('click', function() {
+        const $button = $(this);
+        const originalText = $button.text();
+        
+        $button.text('LOADING...').prop('disabled', true);
+        
+        // ここでBASEのAPI呼び出しまたはページング処理を実装
+        setTimeout(() => {
+            $button.text(originalText).prop('disabled', false);
+            // 実際の実装では、ここで新しい商品を追加
+        }, 1000);
+    });
+
+    // Intersection Observer for animations
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // 要素を監視対象に追加
+        $('.item-card, .section-title, .brand-title').each(function() {
+            observer.observe(this);
+        });
+    }
+
+    // スクロール時のヘッダー背景変更
+    $(window).scroll(function() {
+        const scroll = $(window).scrollTop();
+        const header = $('.site-header');
+        
+        if (scroll > 100) {
+            header.addClass('scrolled');
+        } else {
+            header.removeClass('scrolled');
+        }
+    });
+
     // 画像の遅延読み込み
-    const images = document.querySelectorAll('img[loading="lazy"]');
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -101,14 +183,57 @@ document.addEventListener('DOMContentLoaded', function() {
                     const img = entry.target;
                     img.src = img.dataset.src || img.src;
                     img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
+                    observer.unobserve(img);
                 }
             });
         });
-        
-        images.forEach(img => imageObserver.observe(img));
+
+        $('img[data-src]').each(function() {
+            imageObserver.observe(this);
+        });
     }
-    
+
+    // フォームの処理
+    $('.search-form').on('submit', function(e) {
+        const searchQuery = $('.search-field').val().trim();
+        if (!searchQuery) {
+            e.preventDefault();
+            alert('検索キーワードを入力してください。');
+        }
+    });
+
+    // ソーシャルリンクの処理
+    $('.instagram-link').on('click', function(e) {
+        e.preventDefault();
+        // 実際のInstagramアカウントURLに変更
+        window.open('https://www.instagram.com/holyrebel_official/', '_blank');
+    });
+
+    // キーボードナビゲーション
+    $(document).keydown(function(e) {
+        // Escapeキーでメニューを閉じる
+        if (e.key === 'Escape' && $("#js-humberger").hasClass("-active")) {
+            closeMenu();
+        }
+    });
+
+    // タッチデバイス対応
+    if ('ontouchstart' in window) {
+        $('body').addClass('touch-device');
+        
+        // タッチデバイスでのホバー効果を調整
+        $('.item-card').on('touchstart', function() {
+            $(this).addClass('touch-hover');
+        });
+        
+        $('.item-card').on('touchend', function() {
+            const $this = $(this);
+            setTimeout(() => {
+                $this.removeClass('touch-hover');
+            }, 300);
+        });
+    }
+
     // パフォーマンス最適化: デバウンス関数
     function debounce(func, wait) {
         let timeout;
@@ -121,273 +246,128 @@ document.addEventListener('DOMContentLoaded', function() {
             timeout = setTimeout(later, wait);
         };
     }
-    
-    // リサイズ時の処理（デバウンス適用）
-    const handleResize = debounce(function() {
-        // ウィンドウリサイズ時の処理
-        if (window.innerWidth > 768 && hamburgerMenu.classList.contains('active')) {
+
+    // リサイズ時の処理
+    const handleResize = debounce(() => {
+        // メニューが開いている場合、画面サイズが変わったら閉じる
+        if (window.innerWidth > 768 && $("#js-humberger").hasClass("-active")) {
             closeMenu();
         }
     }, 250);
-    
-    window.addEventListener('resize', handleResize);
-    
-    // タッチデバイス対応
-    if ('ontouchstart' in window) {
-        document.body.classList.add('touch-device');
-        
-        // タッチ時のホバー効果を調整
-        itemCards.forEach(card => {
-            card.addEventListener('touchstart', function() {
-                this.classList.add('touch-active');
-            });
-            
-            card.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    this.classList.remove('touch-active');
-                }, 300);
-            });
-        });
-    }
-    
+
+    $(window).resize(handleResize);
+
     // アクセシビリティ: フォーカス管理
-    const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    
     function trapFocus(element) {
-        const focusableContent = element.querySelectorAll(focusableElements);
-        const firstFocusableElement = focusableContent[0];
-        const lastFocusableElement = focusableContent[focusableContent.length - 1];
-        
-        element.addEventListener('keydown', function(e) {
+        const focusableElements = element.find('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const firstElement = focusableElements.first();
+        const lastElement = focusableElements.last();
+
+        element.on('keydown', function(e) {
             if (e.key === 'Tab') {
                 if (e.shiftKey) {
-                    if (document.activeElement === firstFocusableElement) {
-                        lastFocusableElement.focus();
+                    if (document.activeElement === firstElement[0]) {
                         e.preventDefault();
+                        lastElement.focus();
                     }
                 } else {
-                    if (document.activeElement === lastFocusableElement) {
-                        firstFocusableElement.focus();
+                    if (document.activeElement === lastElement[0]) {
                         e.preventDefault();
+                        firstElement.focus();
                     }
                 }
             }
         });
     }
-    
-    // メニューが開いているときのフォーカストラップ
-    if (hamburgerMenu) {
-        hamburgerBtn.addEventListener('click', function() {
-            if (hamburgerMenu.classList.contains('active')) {
-                trapFocus(hamburgerMenu);
-                // 最初のメニュー項目にフォーカス
-                const firstMenuItem = hamburgerMenu.querySelector('.menu-list a');
-                if (firstMenuItem) {
-                    setTimeout(() => firstMenuItem.focus(), 100);
-                }
-            }
-        });
-    }
-    
+
+    // メニューが開いた時のフォーカス管理
+    $('#js-humberger').on('click', function() {
+        if ($(this).hasClass('-active')) {
+            trapFocus($('#sp-gmenu-area'));
+            $('#sp-gmenu-area a').first().focus();
+        }
+    });
+
     // エラーハンドリング
     window.addEventListener('error', function(e) {
-        console.error('JavaScript Error:', e.error);
-        // 本番環境では適切なエラー報告システムに送信
+        console.warn('HOLY REBEL Template Error:', e.error);
     });
-    
-    // 初期化完了のログ
+
+    // 初期化完了
     console.log('HOLY REBEL Template initialized successfully');
 });
 
-
-    // カテゴリフィルター機能
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const itemCards = document.querySelectorAll('.item-card');
+// Vanilla JavaScript for critical functions
+document.addEventListener('DOMContentLoaded', function() {
     
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            
-            // アクティブボタンの切り替え
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // 商品のフィルタリング
-            itemCards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category');
-                
-                if (category === 'all' || cardCategory === category) {
-                    card.classList.remove('filtering-out');
-                    card.classList.add('filtering-in');
-                    card.style.display = 'block';
-                } else {
-                    card.classList.add('filtering-out');
-                    card.classList.remove('filtering-in');
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
+    // 緊急時のフォールバック：jQueryが読み込まれていない場合
+    if (typeof jQuery === 'undefined') {
+        console.warn('jQuery not loaded, using vanilla JavaScript fallback');
+        
+        // 基本的なハンバーガーメニュー
+        const hamburger = document.getElementById('js-humberger');
+        const menu = document.getElementById('sp-gmenu-area');
+        
+        if (hamburger && menu) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('-active');
+                menu.classList.toggle('-active');
+                document.body.classList.toggle('body-fixed');
             });
-        });
-    });
-    
-    // 商品カードの高度なアニメーション
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, observerOptions);
-    
-    itemCards.forEach(card => {
-        cardObserver.observe(card);
-    });
-    
-    // パララックス効果
-    let ticking = false;
-    
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.item-card');
-        
-        parallaxElements.forEach((element, index) => {
-            const rate = scrolled * -0.5;
-            const yPos = -(rate / (index + 1));
-            element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        });
-        
-        ticking = false;
-    }
-    
-    function requestParallaxUpdate() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
         }
     }
-    
-    // パララックス効果のオン/オフ（パフォーマンス考慮）
-    if (window.innerWidth > 768) {
-        window.addEventListener('scroll', requestParallaxUpdate);
-    }
-    
-    // 商品読み込み機能（AJAX風）
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    let currentPage = 1;
-    
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            this.textContent = 'LOADING...';
-            this.disabled = true;
-            
-            // 実際のBASE環境では、ここでAJAXリクエストを送信
-            setTimeout(() => {
-                // デモ用の処理
-                this.textContent = 'LOAD MORE';
-                this.disabled = false;
-                currentPage++;
-                
-                // 一定回数後にボタンを非表示
-                if (currentPage > 3) {
-                    this.style.display = 'none';
-                }
-            }, 1500);
-        });
-    }
-    
-    // 商品カードの3D効果
-    itemCards.forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
-        });
+
+    // Critical CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        .scrolled {
+            background: rgba(11, 16, 29, 0.98) !important;
+            backdrop-filter: blur(15px);
+        }
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-        });
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .touch-hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .animate-in {
+                animation: none;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+// パララックス効果（パフォーマンス考慮）
+let ticking = false;
+
+function updateParallax() {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.parallax-element');
+    
+    parallaxElements.forEach(element => {
+        const speed = element.dataset.speed || 0.5;
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px)`;
     });
     
-    // カテゴリボタンのキーボードナビゲーション
-    filterButtons.forEach((button, index) => {
-        button.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft' && index > 0) {
-                filterButtons[index - 1].focus();
-            } else if (e.key === 'ArrowRight' && index < filterButtons.length - 1) {
-                filterButtons[index + 1].focus();
-            }
-        });
-    });
-    
-    // スムーズスクロール強化
-    const shopBtn = document.querySelector('.shop-btn');
-    if (shopBtn) {
-        shopBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector('#items');
-            if (target) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
+    ticking = false;
+}
+
+function requestParallaxUpdate() {
+    if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
     }
-    
-    // 商品画像の遅延読み込み強化
-    const lazyImages = document.querySelectorAll('.item-image[loading="lazy"]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    
-                    // プレースホルダー効果
-                    img.style.filter = 'blur(5px)';
-                    img.style.transition = 'filter 0.3s';
-                    
-                    img.onload = () => {
-                        img.style.filter = 'blur(0)';
-                    };
-                    
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                    }
-                    
-                    observer.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '50px'
-        });
-        
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
-    
-    // パフォーマンス監視
-    if ('performance' in window) {
-        window.addEventListener('load', function() {
-            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-            console.log(`Page load time: ${loadTime}ms`);
-        });
-    }
+}
+
+// パララックス効果をスクロールイベントに追加（パフォーマンス最適化）
+if (window.innerWidth > 768) {
+    window.addEventListener('scroll', requestParallaxUpdate);
+}
 

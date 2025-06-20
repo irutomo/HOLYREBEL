@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+{block:NotLoadItemsPage}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{PageTitle}</title>
+    
+    <!-- BASE必須タグ -->
+    {FaviconTag}
+    {BackgroundTag}
+    {GoogleAnalyticsTag}
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Impact&display=swap" rel="stylesheet">
+    
+    <!-- メインスタイルシート -->
+    <link rel="stylesheet" href="style.css">
+    
+    {block:IndexPage}
+    <!-- トップページ専用のheadコンテンツ -->
+    <meta name="description" content="HOLY REBEL - モダンでエッジの効いたファッションブランド">
+    {/block:IndexPage}
+    
+    {block:NotIndexPage}
+    <!-- トップページ以外のheadコンテンツ -->
+    {/block:NotIndexPage}
+</head>
+
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <!-- ハンバーガーメニューボタン -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- ヘッダーロゴ（小） -->
+        <div class="header-logo">
+            <a href="{IndexPageURL}">{LogoTag}</a>
+        </div>
+        
+        <!-- BASEメニュー -->
+        <div class="base-menu">
+            {BASEMenuTag}
+        </div>
+    </header>
+
+    <!-- ハンバーガーメニュー -->
+    <nav class="hamburger-menu" id="hamburgerMenu">
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="menu-content">
+            <button class="menu-close" id="menuClose" aria-label="メニューを閉じる">×</button>
+            <ul class="menu-list">
+                <li><a href="{IndexPageURL}">HOME</a></li>
+                <li><a href="#" class="menu-item">ITEM</a></li>
+                <li><a href="#" class="menu-item">ALL</a></li>
+                <li><a href="#" class="menu-item">NEW ARRIVALS</a></li>
+                <li><a href="#" class="menu-item">RANKING</a></li>
+                <li><a href="#" class="menu-item">TOP</a></li>
+                <li><a href="#" class="menu-item">BOTTOM</a></li>
+                <li><a href="#" class="menu-item">OUTWEAR</a></li>
+                <li><a href="#" class="menu-item">OTHER</a></li>
+                <li><a href="#" class="menu-item">LOOKBOOK</a></li>
+                <li><a href="{ContactPageURL}">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        {block:IndexPage}
+        <!-- ホーム画面 -->
+        <section class="home-section">
+            <div class="home-container">
+                <!-- メインロゴ -->
+                <div class="main-logo">
+                    <img src="assets/images/HLロゴ案2.png" alt="HOLY LABEL" class="brand-logo-image">
+                </div>
+                
+                <!-- ソーシャルアイコン -->
+                <div class="social-icons">
+                    <a href="#" class="social-icon instagram-icon" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- ショップへのリンク -->
+                <div class="shop-link">
+                    <a href="#items" class="shop-btn">SHOP NOW</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 商品一覧セクション -->
+        <section class="items-section" id="items">
+            <div class="container">
+                <h2 class="section-title">COLLECTION</h2>
+                
+                <!-- カテゴリフィルター -->
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">ALL</button>
+                    <button class="filter-btn" data-category="new">NEW ARRIVALS</button>
+                    <button class="filter-btn" data-category="top">TOP</button>
+                    <button class="filter-btn" data-category="bottom">BOTTOM</button>
+                    <button class="filter-btn" data-category="outwear">OUTWEAR</button>
+                    <button class="filter-btn" data-category="other">OTHER</button>
+                </div>
+                
+                <!-- 商品グリッド -->
+                <div class="items-grid" id="itemsGrid">
+                    <!-- サンプル商品（実際のBASE環境では{block:Items}タグで動的生成） -->
+                    <div class="item-card" data-category="top">
+                        <a href="#" class="item-link">
+                            <div class="item-image-wrapper">
+                                <img src="assets/images/サンプル商品写真1.jpeg" alt="ミリタリーゴシックトップス" class="item-image" loading="lazy">
+                                <div class="item-overlay">
+                                    <div class="item-overlay-content">
+                                        <span class="view-details">VIEW DETAILS</span>
+                                        <div class="item-quick-info">
+                                            <p class="item-price-overlay">¥12,800</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3 class="item-name">ミリタリーゴシックトップス</h3>
+                                <p class="item-price">¥12,800</p>
+                                <span class="item-stock">在庫: 5</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="item-card" data-category="outwear">
+                        <a href="#" class="item-link">
+                            <div class="item-image-wrapper">
+                                <img src="assets/images/サンプル商品写真2.jpeg" alt="ゴシックジャケット" class="item-image" loading="lazy">
+                                <div class="item-overlay">
+                                    <div class="item-overlay-content">
+                                        <span class="view-details">VIEW DETAILS</span>
+                                        <div class="item-quick-info">
+                                            <p class="item-price-overlay">¥18,500</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3 class="item-name">ゴシックジャケット</h3>
+                                <p class="item-price">¥18,500</p>
+                                <span class="item-stock">在庫: 3</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- BASEテンプレートタグ（実際の商品データ） -->
+                    {block:Items}
+                    <div class="item-card" data-category="{ItemCategory}">
+                        <a href="{ItemURL}" class="item-link">
+                            <div class="item-image-wrapper">
+                                <img src="{ItemImageURL}" alt="{ItemName}" class="item-image" loading="lazy">
+                                <div class="item-overlay">
+                                    <div class="item-overlay-content">
+                                        <span class="view-details">VIEW DETAILS</span>
+                                        <div class="item-quick-info">
+                                            <p class="item-price-overlay">{ItemPrice}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3 class="item-name">{ItemName}</h3>
+                                <p class="item-price">{ItemPrice}</p>
+                                {block:ItemStock}
+                                <span class="item-stock">在庫: {ItemStock}</span>
+                                {/block:ItemStock}
+                            </div>
+                        </a>
+                    </div>
+                    {/block:Items}
+                </div>
+                
+                <!-- 商品読み込みボタン -->
+                <div class="load-more-container">
+                    <button class="load-more-btn" id="loadMoreBtn">LOAD MORE</button>
+                </div>
+            </div>
+        </section>
+        {/block:IndexPage}
+
+        {block:ItemPage}
+        <!-- 商品詳細ページ -->
+        <section class="item-section">
+            <div class="container">
+                <!-- 商品詳細コンテンツ -->
+                <div class="item-content">
+                    <!-- 商品情報はBASEテンプレートタグで自動生成 -->
+                </div>
+                
+                <!-- 必須タグ -->
+                {ItemAttentionTag}
+                {IllegalReportTag}
+            </div>
+        </section>
+        {/block:ItemPage}
+
+        {block:AboutPage}
+        <!-- Aboutページ -->
+        <section class="about-section">
+            <div class="container">
+                <h2>About HOLY REBEL</h2>
+                {ShopIntroduction}
+            </div>
+        </section>
+        {/block:AboutPage}
+
+        <!-- ページコンテンツ（お問い合わせ、プライバシーポリシーなど） -->
+        {PageContents}
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul class="footer-links">
+                    <li><a href="{PrivacyPageURL}">{lang:Privacy}</a></li>
+                    <li><a href="{LawPageURL}">{lang:Law}</a></li>
+                    <li><a href="{ContactPageURL}">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                <small>© {ShopName} All rights reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+{/block:NotLoadItemsPage}
+
+{block:LoadItemsPage}
+<!-- 商品一覧でajaxで読み込む内容 -->
+<div class="items-container">
+    {block:Items}
+    <div class="item-card">
+        <a href="{ItemURL}" class="item-link">
+            <div class="item-image">
+                <img src="{ItemImageURL}" alt="{ItemName}" loading="lazy">
+            </div>
+            <div class="item-info">
+                <h3 class="item-name">{ItemName}</h3>
+                <p class="item-price">{ItemPrice}</p>
+            </div>
+        </a>
+    </div>
+    {/block:Items}
+</div>
+{/block:LoadItemsPage}
+</html>
+
