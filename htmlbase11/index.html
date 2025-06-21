@@ -1,33 +1,22 @@
+{block:NotLoadItemsPage}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOLY LABEL - ストリート × エレガンス</title>
-    
-    <!-- BASE必須タグ -->
-    {GoogleAnalyticsTag}
-    {BASEMenuTag}
+    <title>{PageTitle}</title>
     {FaviconTag}
-    {BackgroundTag}
-    {ContactPageURL}
-    {PrivacyPageURL}
-    {LawPageURL}
-    {ContactContentsTag}
-    {PrivacyContentsTag}
-    {LawContentsTag}
-    {ItemAttentionTag}
-    {IllegalReportTag}
-    {MembershipPageURL}
-    {MembershipMyPageURL}
-    {MembershipTermsURL}
-    {LogoTag}
+    {CanonicalTag}
     
     <meta name="description" content="HOLY LABEL - ストリート × エレガンスの融合。モダンなアーバンファッションブランド">
     <meta name="keywords" content="ストリート,ファッション,エレガント,アーバン,モダン,HOLY LABEL">
     
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <!-- Open Graph -->
+    <meta property="og:title" content="{PageTitle}">
+    <meta property="og:description" content="HOLY LABEL - ストリート × エレガンスの融合。モダンなアーバンファッションブランド">
+    <meta property="og:image" content="assets/images/HLロゴ案01.png">
+    <meta property="og:url" content="{IndexPageURL}">
+    <meta property="og:type" content="website">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,6 +49,7 @@
         .tac { text-align: center; }
         .mb4 { margin-bottom: 4rem; }
         .sp-mb3 { margin-bottom: 3rem; }
+        .hide { display: none !important; }
 
         /* ヘッダー */
         header.site-header {
@@ -67,7 +57,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 20px;
@@ -76,7 +66,8 @@
             align-items: center;
         }
 
-        .page-template-page-main header.site-header {
+        /* トップページ用ヘッダー透明化 */
+        body#shopTopPage header.site-header {
             background: transparent;
         }
 
@@ -127,17 +118,6 @@
         .humberger.-active .humberger__line { background: transparent; }
         .humberger.-active .humberger__line:before { transform: rotate(45deg); top: 0; }
         .humberger.-active .humberger__line:after { transform: rotate(-45deg); top: 0; }
-
-        button.humberger.-active:after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 998;
-        }
 
         /* ナビゲーションエリア */
         .header__nav-area {
@@ -213,21 +193,367 @@
         /* メインコンテンツ */
         .site-main {
             position: relative;
+            padding-top: 120px;
+            min-height: 100vh;
         }
 
-        .site-main.top {
+        /* トップページ用メインコンテンツ */
+        body#shopTopPage .site-main {
             padding: 0;
         }
 
-        .main-sw {
+        /* トップページ用スタイル */
+        .hero-section {
             height: 100vh;
-            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #000 0%, #1a1a1a 100%);
         }
 
-        .mySwiper .swiper-slide > img {
+        .hero-content {
+            text-align: center;
+            z-index: 100;
+        }
+
+        .hero-logo {
+            width: 300px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.5));
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #ffffff;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            border-color: #ff6b35;
+            transform: translateY(-2px);
+        }
+
+        .products-section {
+            padding: 80px 0;
+            background: #000;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #ffffff;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .item-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .item-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .item-image img {
             width: 100%;
-            height: 100vh;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .item-card:hover .item-image img {
+            transform: scale(1.05);
+        }
+
+        .item-info {
+            padding: 20px;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        .sold-out {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 商品詳細ページ用スタイル */
+        .breadcrumb {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .breadcrumb-list {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .breadcrumb-list > li {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-list > li:not(:last-child):after {
+            content: ">";
+            margin-left: 15px;
+            opacity: 0.5;
+        }
+
+        .breadcrumb-list > li > a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-list > li > a:hover {
+            color: #ff6b35;
+        }
+
+        .item-detail {
+            padding: 60px 0;
+        }
+
+        .item-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .item-images {
+            position: sticky;
+            top: 140px;
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            aspect-ratio: 1;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #ff6b35;
+        }
+
+        .item-details h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .item-price-detail {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 30px;
+        }
+
+        .item-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .purchase-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ページヘッダー */
+        .page-header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .page-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Aboutページ用スタイル */
+        .brand-story {
+            padding: 80px 0;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .story-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .story-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* コンタクトページ用スタイル */
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-family: inherit;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        .form-submit {
+            background: #ff6b35;
+            color: #ffffff;
+            padding: 15px 40px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: #e55a2b;
         }
 
         /* フッター */
@@ -235,6 +561,7 @@
             background: #000;
             padding: 40px 0;
             text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .site-footer .logo {
@@ -298,195 +625,378 @@
 
         /* レスポンシブ */
         @media screen and (max-width: 768px) {
-            button.humberger {
-                width: 25px;
-                height: 25px;
-            }
-
-            header.site-header {
-                padding: 15px 20px;
-            }
-
-            header.site-header a.home img {
-                height: 45px;
-            }
-
-            .humberger__line {
-                height: 2px;
-            }
-
-            .humberger__line:before { top: -6px; }
-            .humberger__line:after { top: 6px; }
-
             .header__nav-area {
                 width: 100%;
                 right: -100%;
                 padding: 80px 30px 30px;
             }
 
-            button.humberger.-active:after {
-                display: none;
-            }
-
-            .global-navigation__list > li > a {
-                font-size: 18px;
-                padding: 20px 0;
-            }
-
-            .global-navigation__list > li > a.expand:after {
-                font-size: 24px;
-            }
-
-            ul.ex-list > li > a {
-                font-size: 16px;
-                padding: 12px 0;
-            }
-
-            .main-sw {
-                height: 100vh;
-            }
-
-            .mySwiper .swiper-slide > img {
-                height: 100vh;
-            }
-
-            .search-field {
+            .hero-logo {
                 width: 200px;
-                font-size: 14px;
             }
 
-            .search-submit {
-                padding: 8px 15px;
-                font-size: 14px;
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .item-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .item-images {
+                position: static;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .story-content h2 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
             }
         }
     </style>
+    
+    {BackgroundTag}
+    {GoogleAnalyticsTag}
 </head>
 
-<body class="wp-singular page-template page-template-page-main page-template-page-main-php page page-id-10 wp-theme-rosenkreuz no-sidebar">
-    <div id="page" class="site">
+<body id="{block:IndexPage}shopTopPage{/block:IndexPage}{block:ItemPage}shopDetailPage{/block:ItemPage}{block:AboutPage}shopAboutPage{/block:AboutPage}{block:ContactPage}shopContactPage{/block:ContactPage}" class="shop">
+    {BASEMenuTag}
+    
+    <header class="site-header">
+        <button id="js-humberger" type="button" class="humberger" aria-controls="navigation" aria-expanded="false">
+            <span class="humberger__line"></span>
+        </button>
+        <a href="{IndexPageURL}" class="home">
+            {LogoTag}
+        </a>
+    </header>
+
+    <div class="header__nav-area js-nav-area" id="sp-gmenu-area">
+        <ul class="global-navigation__list mb4 sp-mb3">
+            <li><a href="{IndexPageURL}">HOME</a></li>
+            <li>
+                <a class="expand" href="#">ITEM</a>
+                <ul class="ex-list" style="display: none;">
+                    <li><a href="{IndexPageURL}">ALL</a></li>
+                    {block:AppsItemCategory}
+                    {AppsItemCategoryCategoriesTag}
+                    {/block:AppsItemCategory}
+                </ul>
+            </li>
+            <li><a href="#lookbook">LOOK BOOK</a></li>
+        </ul>
+
+        <ul class="global-navigation__list mb4 sp-mb3">
+            <li><a href="{AboutPageURL}">ABOUT</a></li>
+            <li><a href="{ContactPageURL}">CONTACT</a></li>
+        </ul>
+    </div>
+    
+    <main id="primary" class="site-main">
         
-        <header class="site-header">
-            <button id="js-humberger" type="button" class="humberger" aria-controls="navigation" aria-expanded="false">
-                <span class="humberger__line"></span>
-            </button>
-            <a href="index.html" class="home">
-                <img src="assets/images/HLロゴ案01.png" alt="HOLY LABEL">
-            </a>
-        </header>
+        {block:IndexPage}
+        <!-- トップページコンテンツ -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <img src="assets/images/HLロゴ案01.png" alt="HOLY LABEL" class="hero-logo">
+                <p class="hero-subtitle">Street × Elegance</p>
+                <a href="#products" class="hero-cta">Shop Now</a>
+            </div>
+        </section>
 
-        <div class="header__nav-area js-nav-area" id="sp-gmenu-area">
-            <ul class="global-navigation__list mb4 sp-mb3">
-                <li><a href="index.html">HOME</a></li>
-                <li>
-                    <a class="expand" href="#">ITEM</a>
-                    <ul class="ex-list" style="display: none;">
-                        <li><a href="items.html">ALL</a></li>
-                        <li><a href="items.html?category=new">NEW ARRIVALS</a></li>
-                        <li><a href="items.html?category=top">TOP</a></li>
-                        <li><a href="items.html?category=bottom">BOTTOM</a></li>
-                        <li><a href="items.html?category=outwear">OUTWEAR</a></li>
-                        <li><a href="items.html?category=accessory">ACCESSORY</a></li>
-                    </ul>
-                </li>
-                <li><a href="lookbook.html">LOOK BOOK</a></li>
-            </ul>
+        <section id="products" class="products-section">
+            <div class="inner">
+                <h2 class="section-title">Featured Products</h2>
+                
+                {block:HasItems}
+                <div class="product-grid">
+                    {block:Items}
+                    <article class="item-card">
+                        <a href="{ItemPageURL}">
+                            <div class="item-image">
+                                <img src="{ItemImage1URL-300}" alt="{ItemTitle}" loading="lazy">
+                                {block:NoItemStock}
+                                <div class="sold-out">SOLD OUT</div>
+                                {/block:NoItemStock}
+                            </div>
+                            <div class="item-info">
+                                <h3 class="item-title">{ItemTitle}</h3>
+                                <p class="item-price">{ItemPrice}</p>
+                            </div>
+                        </a>
+                    </article>
+                    {/block:Items}
+                </div>
+                {/block:HasItems}
+                
+                {block:NoItems}
+                <p class="tac">商品がありません</p>
+                {/block:NoItems}
+            </div>
+        </section>
+        {/block:IndexPage}
 
-            <ul class="global-navigation__list mb4 sp-mb3">
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="contact.html">CONTACT</a></li>
-            </ul>
+        {block:ItemPage}
+        <!-- 商品詳細ページコンテンツ -->
+        <div class="breadcrumb">
+            <div class="inner">
+                <ul class="breadcrumb-list">
+                    <li><a href="{IndexPageURL}">HOME</a></li>
+                    <li><a href="{IndexPageURL}">ITEMS</a></li>
+                    <li>{ItemTitle}</li>
+                </ul>
+            </div>
         </div>
-        
-        <main id="primary" class="site-main top">
-            <div class="main-sw">
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="assets/images/サンプル商品写真1.jpeg" alt="HOLY LABEL Collection">
+
+        <section class="item-detail">
+            <div class="inner">
+                <div class="item-detail-grid">
+                    <div class="item-images">
+                        <img src="{ItemImage1URL-500}" alt="{ItemTitle}" class="main-image" id="mainImage">
+                        <div class="thumbnail-grid">
+                            <img src="{ItemImage1URL-76}" alt="{ItemTitle}" class="thumbnail active" onclick="changeImage('{ItemImage1URL-500}')">
+                            {block:ItemImage2URL-76}<img src="{ItemImage2URL-76}" alt="{ItemTitle}" class="thumbnail" onclick="changeImage('{ItemImage2URL-500}')">{/block:ItemImage2URL-76}
+                            {block:ItemImage3URL-76}<img src="{ItemImage3URL-76}" alt="{ItemTitle}" class="thumbnail" onclick="changeImage('{ItemImage3URL-500}')">{/block:ItemImage3URL-76}
+                            {block:ItemImage4URL-76}<img src="{ItemImage4URL-76}" alt="{ItemTitle}" class="thumbnail" onclick="changeImage('{ItemImage4URL-500}')">{/block:ItemImage4URL-76}
                         </div>
-                        <div class="swiper-slide">
-                            <img src="assets/images/サンプル商品写真2.jpeg" alt="HOLY LABEL Collection">
+                    </div>
+                    
+                    <div class="item-details">
+                        <h1>{ItemTitle}</h1>
+                        <p class="item-price-detail">{ItemPrice}</p>
+                        
+                        <div class="item-description">
+                            {ItemDetail}
                         </div>
-                        <div class="swiper-slide">
-                            <img src="assets/images/サンプル.png" alt="HOLY LABEL Collection">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="assets/images/HLロゴ案2.png" alt="HOLY LABEL">
+                        
+                        <div class="purchase-form">
+                            {ItemAttentionTag}
+                            {PurchaseButton}
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
+        {/block:ItemPage}
 
-        <footer id="colophon" class="site-footer">
-            <div class="site-info">
-                <a class="logo" href="index.html">
-                    <img src="assets/images/HLロゴ案01.png" alt="HOLY LABEL">
-                </a>
-                <form role="search" method="get" class="search-form">
-                    <label>
-                        <span class="screen-reader-text">検索:</span>
-                        <input type="search" class="search-field" placeholder="商品を検索..." value="" name="s" />
-                    </label>
-                    <input type="submit" class="search-submit" value="search" />
-                </form>
-                <ul class="fsns-list">
-                    <li><a href="https://www.instagram.com/holylabel_official/" target="_blank">
-                        <img src="assets/images/icon-insta.png" alt="Instagram">
-                    </a></li>
-                    <li><a href="mailto:info@holylabel.com">
-                        <img src="assets/images/icon-mail.png" alt="Email">
-                    </a></li>
-                </ul>
-                <p class="tac txt-wht cr mb0">Copyright HOLY LABEL All rights reserved.</p>
+        {block:AboutPage}
+        <!-- Aboutページコンテンツ -->
+        <div class="page-header">
+            <div class="inner">
+                <h1 class="page-title">About</h1>
+                <p class="page-description">ストリート × エレガンスを追求するブランドストーリー</p>
             </div>
-        </footer>
+        </div>
 
-    </div>
+        <section class="brand-story">
+            <div class="inner">
+                <div class="story-grid">
+                    <div class="story-content">
+                        <h2>Our Story</h2>
+                        <p>HOLY LABELは2019年、東京の街角から始まりました。ストリートカルチャーの自由さとエレガンスの洗練さを融合させる、新しいファッションの形を求めて。</p>
+                        <p>都市の喧騒の中で生きる現代人に向けて、日常に寄り添いながらも特別感を演出するアイテムを提案し続けています。</p>
+                    </div>
+                    <div class="story-image-area">
+                        <img src="assets/images/HLロゴ案2.png" alt="HOLY LABEL ブランドストーリー" class="story-image">
+                    </div>
+                </div>
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+                <div class="story-grid">
+                    <div class="story-image-area">
+                        <img src="assets/images/サンプル商品写真1.jpeg" alt="HOLY LABEL クラフトマンシップ" class="story-image">
+                    </div>
+                    <div class="story-content">
+                        <h2>Philosophy</h2>
+                        <p>「聖なるラベル」という名前に込められた想いは、着る人それぞれの個性を神聖なものとして尊重し、その人らしさを最大限に引き出すこと。</p>
+                        <p>ファッションを通じて、自分自身の価値を再発見し、自信を持って歩んでいけるようなアイテムを創造することが私たちの使命です。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {/block:AboutPage}
+
+        {block:ContactPage}
+        <!-- コンタクトページコンテンツ -->
+        <div class="page-header">
+            <div class="inner">
+                <h1 class="page-title">Contact</h1>
+                <p class="page-description">お問い合わせはこちらから</p>
+            </div>
+        </div>
+
+        <section class="contact-section">
+            <div class="inner">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p>お気軽にお問い合わせください。</p>
+                        
+                        <div class="contact-item">
+                            <h4>Email</h4>
+                            <p>info@holylabel.com</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h4>Phone</h4>
+                            <p>03-1234-5678</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h4>Address</h4>
+                            <p>東京都渋谷区原宿1-2-3</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        {ContactContentsTag}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {/block:ContactPage}
+
+    </main>
+
+    <footer id="colophon" class="site-footer">
+        <div class="site-info">
+            <a class="logo" href="{IndexPageURL}">
+                <img src="assets/images/HLロゴ案01.png" alt="HOLY LABEL">
+            </a>
+            
+            <form role="search" method="get" action="{SearchPageURL}" class="search-form">
+                <label>
+                    <span class="screen-reader-text">検索:</span>
+                    <input type="search" class="search-field" placeholder="商品を検索..." value="{IndexPageSearch}" name="q" />
+                </label>
+                <input type="submit" class="search-submit" value="search" />
+            </form>
+            
+            <ul class="fsns-list">
+                <li><a href="https://www.instagram.com/holylabel_official/" target="_blank">
+                    <img src="assets/images/icon-insta.png" alt="Instagram">
+                </a></li>
+                <li><a href="mailto:info@holylabel.com">
+                    <img src="assets/images/icon-mail.png" alt="Email">
+                </a></li>
+            </ul>
+            
+            <p class="tac txt-wht cr mb0">Copyright HOLY LABEL All rights reserved.</p>
+            
+            <div class="legal-links">
+                <a href="{PrivacyPageURL}">プライバシーポリシー</a>
+                <a href="{LawPageURL}">特定商取引法に基づく表記</a>
+            </div>
+        </div>
+        
+        {IllegalReportTag}
+        {IllegalReportMessageTag}
+    </footer>
     
     <script>
-        // Swiper初期化
-        var swiper = new Swiper(".mySwiper", {
-            effect: "fade",
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            speed: 1000,
-        });
-
         // ハンバーガーメニュー
-        $(document).ready(function() {
-            $('#js-humberger').on('click', function() {
-                $(this).toggleClass('-active');
-                $('.js-nav-area').toggleClass('-active');
-                $('body').toggleClass('body-fixed');
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('js-humberger');
+            const navArea = document.querySelector('.js-nav-area');
+            
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('-active');
+                navArea.classList.toggle('-active');
+                document.body.classList.toggle('body-fixed');
             });
 
             // 展開メニュー
-            $('.expand').on('click', function(e) {
-                e.preventDefault();
-                $(this).toggleClass('open');
-                $(this).next('.ex-list').slideToggle();
+            const expandLinks = document.querySelectorAll('.expand');
+            expandLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('open');
+                    const nextList = this.nextElementSibling;
+                    if (nextList) {
+                        nextList.style.display = nextList.style.display === 'block' ? 'none' : 'block';
+                    }
+                });
             });
 
             // ナビゲーション外クリック時の閉じる処理
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('.header__nav-area, #js-humberger').length) {
-                    $('#js-humberger').removeClass('-active');
-                    $('.js-nav-area').removeClass('-active');
-                    $('body').removeClass('body-fixed');
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.header__nav-area') && !e.target.closest('#js-humberger')) {
+                    hamburger.classList.remove('-active');
+                    navArea.classList.remove('-active');
+                    document.body.classList.remove('body-fixed');
                 }
+            });
+
+            // 商品詳細ページの画像切り替え
+            window.changeImage = function(src) {
+                const mainImage = document.getElementById('mainImage');
+                if (mainImage) {
+                    mainImage.src = src;
+                }
+                
+                // サムネイルのアクティブ状態を更新
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                thumbnails.forEach(function(thumb) {
+                    thumb.classList.remove('active');
+                });
+                event.target.classList.add('active');
+            };
+
+            // スムーススクロール
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
         });
     </script>
 </body>
-</html> 
+</html>
+{/block:NotLoadItemsPage}
+
+{block:LoadItemsPage}
+<!-- 無限スクロール用追加コンテンツ -->
+{block:HasItems}
+{block:Items}
+<article class="item-card">
+    <a href="{ItemPageURL}">
+        <div class="item-image">
+            <img src="{ItemImage1URL-300}" alt="{ItemTitle}" loading="lazy">
+            {block:NoItemStock}
+            <div class="sold-out">SOLD OUT</div>
+            {/block:NoItemStock}
+        </div>
+        <div class="item-info">
+            <h3 class="item-title">{ItemTitle}</h3>
+            <p class="item-price">{ItemPrice}</p>
+        </div>
+    </a>
+</article>
+{/block:Items}
+{/block:HasItems}
+{/block:LoadItemsPage}
